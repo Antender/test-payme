@@ -22,7 +22,6 @@ function sendResult(dependencies,res) {
     var upToDate = 0
     var requests = []
     var currentVersions = []
-    var cleanVersion = new RegExp('([0-9]+(\.[0-9]+)*)')
     for (var depName in dependencies) {
         requests.push(request("https://registry.npmjs.org/" + depName))
         currentVersions.push(dependencies[depName])
@@ -52,10 +51,6 @@ function sendResult(dependencies,res) {
             res.send("Problem with dependencies fetching")
         }
     )
-}
-
-function diff(current,next) {
-    return semver.diff(current,next)
 }
 
 app.listen(3000);
